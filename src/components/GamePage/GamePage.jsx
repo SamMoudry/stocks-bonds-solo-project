@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import './GamePage.css'
 
 function GamePage() {
@@ -21,63 +22,63 @@ function GamePage() {
           <td className="stockname" >
             <span id="stockname_2">Growth Corp</span><br />
             <div className="yieldstyle">YIELD 1%</div>
-            <input type="hidden" value="100" id="value_0_2" />
+            <input type="hidden" value={value} id="value_0_2" />
           </td>
         </tr>
         <tr>
           <td className="stockname">
             <span id="stockname_3">Metro Prop</span><br />
             <div className="yieldstyle">NO YIELD</div>
-            <input type="hidden" value="100" id="value_0_3" />
+            <input type="hidden" value={value} id="value_0_3" />
           </td>
         </tr>
         <tr>
           <td className="stockname" >
             <span id="stockname_4">Pioneer Mutl</span><br />
             <div className="yieldstyle">YIELD 4%</div>
-            <input type="hidden" value="100" id="value_0_4" />
+            <input type="hidden" value={value} id="value_0_4" />
           </td>
         </tr>
         <tr>
           <td className="stockname">
             <span id="stockname_5">Shady Brooks</span><br />
             <div className="yieldstyle">YIELD 7%</div>
-            <input type="hidden" value="100" id="value_0_5" />
+            <input type="hidden" value={value} id="value_0_5" />
           </td>
         </tr>
         <tr>
           <td className="stockname" >
             <span id="stockname_6">Stryker Drlg</span><br />
             <div className="yieldstyle">NO YIELD</div>
-            <input type="hidden" value="100" id="value_0_6" />
+            <input type="hidden" value={value} id="value_0_6" />
           </td>
         </tr>
         <tr>
           <td className="stockname">
             <span id="stockname_7">Tri City Trans</span><br />
             <div className="yieldstyle">NO YIELD</div>
-            <input type="hidden" value="100" id="value_0_7" />
+            <input type="hidden" value={value} id="value_0_7" />
           </td>
         </tr>
         <tr>
           <td className="stockname" >
             <span id="stockname_8">United Auto</span><br />
             <div className="yieldstyle">YIELD 2%</div>
-            <input type="hidden" value="100" id="value_0_8" />
+            <input type="hidden" value={value} id="value_0_8" />
           </td>
         </tr>
         <tr>
           <td className="stockname">
             <span id="stockname_9">Uranium Ent</span><br />
             <div className="yieldstyle">YIELD 6%</div>
-            <input type="hidden" value="100" id="value_0_9" />
+            <input type="hidden" value={value} id="value_0_9" />
           </td>
         </tr>
         <tr>
           <td className="stockname" >
             <span id="stockname_10">Valley Power</span><br />
             <div className="yieldstyle">YIELD 3%</div>
-            <input type="hidden" value="100" id="value_0_10" />
+            <input type="hidden" value={value} id="value_0_10" />
           </td>
         </tr>
         </tbody>
