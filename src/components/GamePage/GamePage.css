@@ -1,0 +1,50 @@
+body
+{
+    font-size: 200%;
+    font-family: Raleway;
+}
+
+table
+{
+    border-collapse: collapse;
+    font-size: 80%;
+}
+
+td, th
+{
+    border: 1px solid black;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-family: EraserDust;
+}
+
+th
+{
+    font-family: Raleway;
+    font-size: 18px;
+    border: 0px;
+}
+
+.yieldstyle
+{
+    font-family: Raleway;
+    font-size: 11px;
+    font-style: italic;
+    text-align: right;
+}
+
+.stockdelta
+{
+    font-size: 80%;
+}
+
+td.stockvalue
+{
+    text-align: center;
+}
+
+td.stockname
+{
+    font-weight: bold;
+    font-family: Raleway;
+}
