@@ -15,6 +15,7 @@ function GamePage() {
   const value10 = useState(100);
   const totalBalance = useState(5000);
   const yearlyEarnings = useState(0);
+  const newYearNum = useState(0);
   return (
     <div className="container">
       <table id="stockboard">
@@ -94,7 +95,7 @@ function GamePage() {
         </tr>
         </tbody>
       </table><br />
-      <button>Year 1</button><br />
+      { newYearNum ? <button>Year {newYearNum}</button> : <button>Year 1</button>}<br />
       <div>Total Balance: {totalBalance}</div><br />
       <div>Yearly Earnings: {yearlyEarnings}</div>
     </div>
