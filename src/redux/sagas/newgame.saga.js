@@ -1,9 +1,10 @@
-import { takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* newGame(action) {
     try{
-        yield axios.post('/api/newgame', action.payload);
+        const response = yield axios.post('/api/newgame', action.payload);
+        yield put({ type: 'SET_NEW_GAME', payload: response});
     }catch (error) {
         console.log(error);
     }
