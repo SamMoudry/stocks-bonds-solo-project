@@ -13,9 +13,9 @@ function GamePage() {
   const [value8, setValue8] = useState(100);
   const [value9, setValue9] = useState(100);
   const [value10, setValue10] = useState(100);
-  const totalBalance = useState(5000);
-  const yearlyEarnings = useState(0);
-  const newYearNum = useState(0);
+  const [totalBalance, setTotalBalance] = useState(5000);
+  const [yearlyEarnings, setYearlyEarnings] = useState(0);
+  const [newYearNum, setNewYearNum] = useState(0);
   const dispatch = useDispatch();
   const user_id = useSelector(store => store.user.id)
 
@@ -24,15 +24,15 @@ function GamePage() {
   }, [dispatch, user_id]);
 
   const newYear = () => {
-
+    console.log('in newYear');
   }
 
   const YearButton = () => {
-    if (newYearNum == 0) {
+    if (newYearNum === 0) {
       return (
         <button onClick={newYear}>Start Game</button>
       );
-    } if (newYearNum == 11) {
+    } if (newYearNum === 11) {
         return (
           <button onClick={newYear}>New Game</button>
         );
