@@ -1,9 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import './GamePage.css'
 
 function GamePage() {
+  const dispatch = useDispatch;
   const value = useState(100);
+  const user_id = useSelector(store => store.user.id)
+
+  useEffect(() => {
+    dispatch({ type: 'NEW_GAME', payload: user_id});
+  }, [dispatch, user_id]);
+
+
+
+
+
   return (
     <div className="container">
       <table id="stockboard">
