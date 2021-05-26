@@ -16,6 +16,12 @@ function GamePage() {
   const totalBalance = useState(5000);
   const yearlyEarnings = useState(0);
   const newYearNum = useState(0);
+  const dispatch = useDispatch();
+  const user_id = useSelector(store => store.user.id)
+
+  useEffect(() => {
+    dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
+  }, [dispatch, user_id]);
   return (
     <div className="container">
       <table id="stockboard">
