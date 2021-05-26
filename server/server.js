@@ -25,7 +25,7 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
-app,use('/api/newyear', newyearRouter);
+app.use('/api/newyear', newyearRouter);
 app.use('/api/newgame', newgameRouter);
 
 // Serve static files
