@@ -1,5 +1,5 @@
 
-const setNewGame = (state = '', action) => {
+const setNewGame = (state = {}, action) => {
     switch (action.type) {
         case 'SET_NEW_GAME':
           return action.payload;

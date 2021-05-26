@@ -4,7 +4,7 @@ import axios from 'axios';
 function* newGame(action) {
     try{
         const response = yield axios.post('/api/newgame', action.payload);
-        yield put({ type: 'SET_NEW_GAME', payload: response});
+        yield put({ type: 'SET_NEW_GAME', payload: response.data});
     }catch (error) {
         console.log(error);
     }

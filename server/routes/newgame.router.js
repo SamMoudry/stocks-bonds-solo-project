@@ -6,9 +6,9 @@ router.post('/', (req, res) => {
     const queryText = `INSERT INTO "games" ("user_id") 
     VALUES ($1)
     RETURNING id`
-     const newGame = client.query(queryText, [req.body.id])
-        .then(() => {
-            res.sendStatus(newGame.rows[0].id);
+     pool.query(queryText, [req.body.userId])
+        .then((result) => {
+            res.send({ gameId: result.rows[0].id});
         })
         .catch((error) => {
             console.log('Error POST /api/newgame', error)

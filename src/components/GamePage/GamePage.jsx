@@ -3,12 +3,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import './GamePage.css'
 
 function GamePage() {
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const value = useState(100);
   const user_id = useSelector(store => store.user.id)
 
   useEffect(() => {
-    dispatch({ type: 'NEW_GAME', payload: user_id});
+    dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
   }, [dispatch, user_id]);
 
 
