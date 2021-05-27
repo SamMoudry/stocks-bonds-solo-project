@@ -18,7 +18,7 @@ function GamePage() {
   const [newYearNum, setNewYearNum] = useState(0);
   const dispatch = useDispatch();
   const user_id = useSelector(store => store.user.id)
-
+  const gameId = useSelector(store => store.use.id)
   useEffect(() => {
     dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
   }, [dispatch, user_id]);
@@ -44,7 +44,9 @@ function GamePage() {
     }
   }
 
-
+  const sendYearData = () => {
+    const yearDataToSend = {year_number: newYearNum, game_id: gameId}
+  }
 
 
 
