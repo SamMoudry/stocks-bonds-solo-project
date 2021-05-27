@@ -28,6 +28,7 @@ function GamePage() {
   }
 
   const YearButton = () => {
+    console.log(newYearNum);
     if (newYearNum === 0) {
       return (
         <button onClick={newYear}>Start Game</button>
@@ -126,7 +127,7 @@ function GamePage() {
         </tr>
         </tbody>
       </table><br />
-      {YearButton()}<br />
+      {YearButton()}
       <div>Total Balance: {totalBalance}</div><br />
       <div>Yearly Earnings: {yearlyEarnings}</div>
     </div>
