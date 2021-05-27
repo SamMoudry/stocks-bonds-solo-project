@@ -1,21 +1,52 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import './GamePage.css'
 
 function GamePage() {
-  const value1 = useState(100);
-  const value2 = useState(100);
-  const value3 = useState(100);
-  const value4 = useState(100);
-  const value5 = useState(100);
-  const value6 = useState(100);
-  const value7 = useState(100);
-  const value8 = useState(100);
-  const value9 = useState(100);
-  const value10 = useState(100);
-  const totalBalance = useState(5000);
-  const yearlyEarnings = useState(0);
-  const newYearNum = useState(0);
+  const [value1, setValue1] = useState(100);
+  const [value2, setValue2] = useState(100);
+  const [value3, setValue3] = useState(100);
+  const [value4, setValue4] = useState(100);
+  const [value5, setValue5] = useState(100);
+  const [value6, setValue6] = useState(100);
+  const [value7, setValue7] = useState(100);
+  const [value8, setValue8] = useState(100);
+  const [value9, setValue9] = useState(100);
+  const [value10, setValue10] = useState(100);
+  const [totalBalance, setTotalBalance] = useState(5000);
+  const [yearlyEarnings, setYearlyEarnings] = useState(0);
+  const [newYearNum, setNewYearNum] = useState(0);
+  const dispatch = useDispatch();
+  const user_id = useSelector(store => store.user.id)
+
+  useEffect(() => {
+    dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
+  }, [dispatch, user_id]);
+
+  const newYear = () => {
+    console.log('in newYear');
+  }
+
+  const YearButton = () => {
+    if (newYearNum === 0) {
+      return (
+        <button onClick={newYear}>Start Game</button>
+      );
+    } if (newYearNum === 11) {
+        return (
+          <button onClick={newYear}>New Game</button>
+        );
+    } else {
+      return (
+        <button onClick={newYear}>Year {newYearNum}</button>
+      );
+    }
+  }
+
+
+
+
+
   return (
     <div className="container">
       <table id="stockboard">
@@ -95,7 +126,7 @@ function GamePage() {
         </tr>
         </tbody>
       </table><br />
-      { newYearNum ? <button>Year {newYearNum}</button> : <button>Year 1</button>}<br />
+      {YearButton()}<br />
       <div>Total Balance: {totalBalance}</div><br />
       <div>Yearly Earnings: {yearlyEarnings}</div>
     </div>
