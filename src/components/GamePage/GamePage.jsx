@@ -61,7 +61,7 @@ function GamePage() {
                             {stock_id: 9, value: value9, stock_amount: amount9},
                             {stock_id: 10, value: value10, stock_amount: amount10}
                           ]
-    dispatch({type: 'NEW_YEAR', payload: {year_number: newYearNum, 
+    dispatch({type: 'LAST_YEAR', payload: {year_number: newYearNum, 
       game_id: gameId, 
       total_yield: yearlyEarnings, 
       total_money: totalBalance, 
