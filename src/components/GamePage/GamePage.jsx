@@ -18,7 +18,7 @@ function GamePage() {
   const [newYearNum, setNewYearNum] = useState(0);
   const dispatch = useDispatch();
   const user_id = useSelector(store => store.user.id)
-
+  const gameId = useSelector(store => store.use.id)
   useEffect(() => {
     dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
   }, [dispatch, user_id]);
@@ -28,6 +28,7 @@ function GamePage() {
   }
 
   const YearButton = () => {
+    console.log(newYearNum);
     if (newYearNum === 0) {
       return (
         <button onClick={newYear}>Start Game</button>
@@ -43,7 +44,9 @@ function GamePage() {
     }
   }
 
-
+  const sendYearData = () => {
+    const yearDataToSend = {year_number: newYearNum, game_id: gameId}
+  }
 
 
 
@@ -126,7 +129,7 @@ function GamePage() {
         </tr>
         </tbody>
       </table><br />
-      {YearButton()}<br />
+      {YearButton()}
       <div>Total Balance: {totalBalance}</div><br />
       <div>Yearly Earnings: {yearlyEarnings}</div>
     </div>
