@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     } catch (error) {
         //Rollback takes back all the code it there is an error.  If one INSERT worked but the other didn't it would take back the first INSERT from the DATABASE
         await client.query('ROLLBACK')
-        console.log('Error POST /api/game', error);
+        console.log('Error POST /api/newyear', error);
         res.sendStatus(500);
     } finally {
         client.release()
@@ -42,14 +42,14 @@ router.post('/', async (req, res) => {
 });
 
 //GET next year data
-router.get('/', (req, res) => {
+router.get('/:id/:year', (req, res) => {
     //Generates the roll of 2d6
-    const dieroll = (1 + Math.floor(Math.random() * 6)) + (1 + Math.floor(Math.random() * 6));
+    let dieroll = (1 + Math.floor(Math.random() * 6)) + (1 + Math.floor(Math.random() * 6));
 	dieroll = dieroll - 2;
     //Generates the two possible sides for the slider
-    const slider_side = Math.floor(Math.random() * 2) + 1;
+    let slider_side = Math.floor(Math.random() * 2) + 1;
 
-    let queryText = `SELECT SUM(year_number + 1), game_id, total_yield, total_money, stock_amount, SUM(value + change) FROM "year" 
+    let queryText = `SELECT SUM(year_number + 1) AS year_number, game_id, total_yield, total_money, stock_amount, SUM(value + change) AS value FROM "year" 
     JOIN stock_year ON year_id = year.id
     JOIN slider ON slider.stock_id = stock_year.stock_id
     WHERE game_id = $1
@@ -57,23 +57,24 @@ router.get('/', (req, res) => {
     AND slider.side = $3
     AND slider.die_roll = $4
     GROUP BY stock_year.stock_id, year.year_number, year.total_yield, year.total_money, stock_year.stock_amount, year.game_id;`
-    const { 
-        game_id,
-        year_number,
-    } = req.body;
-    pool.query(queryText, [game_id, year_number, slider_side, dieroll])
+    pool.query(queryText, [req.params.id, req.params.year, slider_side, dieroll])
         .then((result) => {
+            let valueArray = [];
+            for (let i = 0; i < result.rows.length; i++) {
+                valueArray.push(Number(result.rows[i].value));
+            }
             res.send({ gameId: result.rows[0].game_id,
             year_number: result.rows[0].year_number,
             total_yield: result.rows[0].total_yield,
             total_money: result.rows[0].total_money,
             stock_amount: result.rows[0].stock_amount,
-            value: result.rows[0].value,});
+            value: valueArray,
+        });
             dieroll = 0;
             slider_side = 0;
         })
         .catch((error) => {
-            console.log('Error POST /api/game', error)
+            console.log('Error GET /api/newyear', error)
             res.sendStatus(500);
         });
 })

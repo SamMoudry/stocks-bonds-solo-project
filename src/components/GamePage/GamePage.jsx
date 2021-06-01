@@ -25,26 +25,27 @@ function GamePage() {
   const [amount10, setAmount10] = useState(0);
   const [totalBalance, setTotalBalance] = useState(5000);
   const [yearlyEarnings, setYearlyEarnings] = useState(0);
-  const [newYearNum, setNewYearNum] = useState(0);
+  const [yearNum, setYearNum] = useState(0);
   const dispatch = useDispatch();
   const user_id = useSelector(store => store.user.id)
   const gameId = useSelector(store => store.setNewGame.gameId);
+  const newYearData = useSelector(store => store.setNewYear);
   useEffect(() => {
     dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
   }, [dispatch, user_id]);
 
   const YearButton = () => {
-    if (newYearNum === 0) {
+    if (yearNum === 0) {
       return (
         <button onClick={newYear}>Start Game</button>
       );
-    } if (newYearNum === 11) {
+    } if (yearNum === 11) {
         return (
           <button onClick={newYear}>New Game</button>
         );
     } else {
       return (
-        <button onClick={newYear}>Year {newYearNum}</button>
+        <button onClick={newYear}>Year {yearNum}</button>
       );
     }
   }
@@ -61,13 +62,14 @@ function GamePage() {
                             {stock_id: 9, value: value9, stock_amount: amount9},
                             {stock_id: 10, value: value10, stock_amount: amount10}
                           ]
-    dispatch({type: 'LAST_YEAR', payload: {year_number: newYearNum, 
+    dispatch({type: 'LAST_YEAR', payload: {year_number: yearNum, 
       game_id: gameId, 
       total_yield: yearlyEarnings, 
       total_money: totalBalance, 
       stocks: stockDataToSend,
     }});
-    dispatch({type: 'NEW_YEAR', payload: {game_id: gameId, year_number: newYearNum}})
+    dispatch({type: 'NEW_YEAR', payload: {game_id: gameId, year_number: yearNum}})
+    console.log(newYearData);
   }
 
   
