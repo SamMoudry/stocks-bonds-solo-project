@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool');
 
-// POST a new year
+// POST previous year
 router.post('/', async (req, res) => {
     const client = await pool.connect();
     try {
@@ -40,5 +40,42 @@ router.post('/', async (req, res) => {
         client.release()
     }
 });
+
+//GET next year data
+router.get('/', (req, res) => {
+
+    const dieroll = (1 + Math.floor(Math.random() * 6)) + (1 + Math.floor(Math.random() * 6));
+	dieroll = dieroll - 2;
+
+    const slider_side = Math.floor(Math.random() * 2) + 1;
+
+    let queryText = `SELECT SUM(year_number + 1), game_id, total_yield, total_money, stock_amount, SUM(value + change) FROM "year" 
+    JOIN stock_year ON year_id = year.id
+    JOIN slider ON slider.stock_id = stock_year.stock_id
+    WHERE game_id = $1
+    AND year_number = $2
+    AND slider.side = $3
+    AND slider.die_roll = $4
+    GROUP BY stock_year.stock_id, year.year_number, year.total_yield, year.total_money, stock_year.stock_amount, year.game_id;`
+    const { 
+        game_id,
+        year_number,
+    } = req.body;
+    pool.query(queryText, [game_id, year_number, slider_side, dieroll])
+        .then((result) => {
+            res.send({ gameId: result.rows[0].game_id,
+            year_number: result.rows[0].year_number,
+            total_yield: result.rows[0].total_yield,
+            total_money: result.rows[0].total_money,
+            stock_amount: result.rows[0].stock_amount,
+            value: result.rows[0].value,});
+            dieroll = 0;
+            slider_side = 0;
+        })
+        .catch((error) => {
+            console.log('Error POST /api/game', error)
+            res.sendStatus(500);
+        });
+})
 
 module.exports = router;
