@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* lastYear(action) {
     try{
-        yield axios.post('/api/lastyear', action.payload);
+        yield axios.post('/api/newyear', action.payload);
     }catch (error) {
         console.log(error);
     }

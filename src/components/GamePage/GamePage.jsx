@@ -67,6 +67,7 @@ function GamePage() {
       total_money: totalBalance, 
       stocks: stockDataToSend,
     }});
+    dispatch({type: 'NEW_YEAR', payload: {game_id: gameId, year_number: newYearNum}})
   }
 
   

@@ -43,10 +43,10 @@ router.post('/', async (req, res) => {
 
 //GET next year data
 router.get('/', (req, res) => {
-
+    //Generates the roll of 2d6
     const dieroll = (1 + Math.floor(Math.random() * 6)) + (1 + Math.floor(Math.random() * 6));
 	dieroll = dieroll - 2;
-
+    //Generates the two possible sides for the slider
     const slider_side = Math.floor(Math.random() * 2) + 1;
 
     let queryText = `SELECT SUM(year_number + 1), game_id, total_yield, total_money, stock_amount, SUM(value + change) FROM "year" 
