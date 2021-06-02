@@ -52,6 +52,7 @@ function GamePage() {
     }
   }
 
+
   const newYear = () => {
     const stockDataToSend = [{stock_id: 1, value: value1, stock_amount: amount1},
                             {stock_id: 2, value: value2, stock_amount: amount2},
@@ -74,6 +75,7 @@ function GamePage() {
     renderNewYear();
   }
 
+<<<<<<< HEAD
   const renderNewYear = () => {
       // append column to the HTML table
     let tbl = document.getElementById('stockboard'), // table reference
@@ -107,6 +109,8 @@ function GamePage() {
     cell.appendChild(div);                   // append DIV to the table cell
   }
   
+=======
+>>>>>>> e48ee13c79bc53eb00c0aeb7858687e8bfbea9c8
 
   return (
     <div className="container">
