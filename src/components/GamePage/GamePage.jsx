@@ -50,6 +50,7 @@ function GamePage() {
     }
   }
 
+
   const newYear = () => {
     const stockDataToSend = [{stock_id: 1, value: value1, stock_amount: amount1},
                             {stock_id: 2, value: value2, stock_amount: amount2},
@@ -72,7 +73,6 @@ function GamePage() {
     console.log(newYearData);
   }
 
-  
 
   return (
     <div className="container">
