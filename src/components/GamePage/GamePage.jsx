@@ -35,18 +35,20 @@ function GamePage() {
   }, [dispatch, user_id]);
 
   const YearButton = () => {
-    if (yearNum === 0) {
-      return (
-        <button onClick={newYear}>Start Game</button>
-      );
-    } if (yearNum === 11) {
+    if (gameId) {
+      if (yearNum === 0) {
         return (
-          <button onClick={newYear}>New Game</button>
+          <button onClick={newYear}>Start Game</button>
         );
-    } else {
-      return (
-        <button onClick={newYear}>Year {yearNum}</button>
-      );
+      } else if (yearNum === 11) {
+          return (
+            <button onClick={newYear}>New Game</button>
+          );
+      } else {
+        return (
+          <button onClick={newYear}>Year {yearNum +1}</button>
+        );
+      }
     }
   }
 
@@ -68,10 +70,42 @@ function GamePage() {
       total_money: totalBalance, 
       stocks: stockDataToSend,
     }});
-    dispatch({type: 'NEW_YEAR', payload: {game_id: gameId, year_number: yearNum}})
-    console.log(newYearData);
+    //dispatch({type: 'NEW_YEAR', payload: {game_id: gameId, year_number: yearNum}})
+    renderNewYear();
   }
 
+  const renderNewYear = () => {
+      // append column to the HTML table
+    let tbl = document.getElementById('stockboard'), // table reference
+        i;
+    // open loop for each row and append cell
+    for (i = 0; i < tbl.rows.length; i++) {
+      switch (i) {
+        case 0:
+      }
+      
+      
+      
+      
+      
+      // if (i == 0) {
+      //   createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), yearNum);
+      // } else {
+      //   createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i);
+      // } 
+    }
+
+  }
+
+    // create DIV element and append to the table cell
+  function createCell(cell, text, style) {
+    let div = document.createElement('div'), // create DIV element
+        txt = document.createTextNode(text); // create text node
+    div.appendChild(txt);                    // append text node to the DIV
+    div.setAttribute('class', style);        // set DIV class attribute
+    div.setAttribute('className', style);    // set DIV class attribute for IE (?!)
+    cell.appendChild(div);                   // append DIV to the table cell
+  }
   
 
   return (
