@@ -73,23 +73,32 @@ function GamePage() {
       total_money: totalBalance, 
       stocks: stockDataToSend,
     }});
-    if (newYearData) {
-      setValues();
-    }
   }
 
-  const setValues = () => {
-    setValue2(currentYear.value[0]);
-    setValue3(currentYear.value[1]);
-    setValue4(currentYear.value[2]);
-    setValue5(currentYear.value[3]);
-    setValue6(currentYear.value[4]);
-    setValue7(currentYear.value[5]);
-    setValue8(currentYear.value[6]);
-    setValue9(currentYear.value[7]);
-    setValue10(currentYear.value[8]);
-  }
 
+  // const taco = () => {
+  //   setValue2(currentYear.value[0]);
+  //   setValue3(currentYear.value[1]);
+  //   setValue4(currentYear.value[2]);
+  //   setValue5(currentYear.value[3]);
+  //   setValue6(currentYear.value[4]);
+  //   setValue7(currentYear.value[5]);
+  //   setValue8(currentYear.value[6]);
+  //   setValue9(currentYear.value[7]);
+  //   setValue10(currentYear.value[8]);
+  //   setTotalBalance(currentYear.total_money);
+  //   setYearlyEarnings(currentYear.total_yield);
+  //   setYearNum(currentYear.year_number);
+  //   console.log(value2);
+  // }
+
+  // if (currentYear) {
+  //   taco();
+  // }
+
+  const [stocks, setStocks] = useState({
+
+  })
 
   return (
     <div className="container">
@@ -98,26 +107,46 @@ function GamePage() {
       <div>Total Balance: {totalBalance}</div><br />
       <div>Yearly Earnings: {yearlyEarnings}</div>
       <form>
-        <label htmlFor="amount1">Central City Bonds:</label>
-        <input type="number" id="amount1" value={amount1} step="10" min="0" onChange={(event) => setAmount1(event.target.value)} />
-        <label htmlFor="amount2">Growth Corp:</label>
-        <input type="number" id="amount2" value={amount2} step="10" min="0" onChange={(event) => setAmount2(event.target.value)}/>
-        <label htmlFor="amount3">Metro Prop:</label>
-        <input type="number" id="amount3" value={amount3} step="10" min="0" onChange={(event) => setAmount3(event.target.value)}/>
-        <label htmlFor="amount4">Pioneer Mult:</label>
-        <input type="number" id="amount4" value={amount4} step="10" min="0" onChange={(event) => setAmount4(event.target.value)}/>
-        <label htmlFor="amount5">Shady Brooks:</label>
-        <input type="number" id="amount5" value={amount5} step="10" min="0" onChange={(event) => setAmount5(event.target.value)}/>
-        <label htmlFor="amount6">Stryker Drlg:</label>
-        <input type="number" id="amount6" value={amount6} step="10" min="0" onChange={(event) => setAmount6(event.target.value)}/>
-        <label htmlFor="amount7">Tri City Trans:</label>
-        <input type="number" id="amount7" value={amount7} step="10" min="0" onChange={(event) => setAmount7(event.target.value)}/>
-        <label htmlFor="amount8">United Auto:</label>
-        <input type="number" id="amount8" value={amount8} step="10" min="0" onChange={(event) => setAmount8(event.target.value)}/>
-        <label htmlFor="amount9">Uranium Ent:</label>
-        <input type="number" id="amount9" value={amount9} step="10" min="0" onChange={(event) => setAmount9(event.target.value)}/>
-        <label htmlFor="amount10">Valley Power:</label>
-        <input type="number" id="amount10" value={amount10} step="10" min="0" onChange={(event) => setAmount10(event.target.value)}/>
+        <div className="stock_amount">
+          <label htmlFor="amount1">Central City Bonds:</label>
+          <input type="number" id="amount1" value={amount1} step="10" min="0" onChange={(event) => setAmount1(event.target.value)} />
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount2">Growth Corp:</label>
+          <input type="number" id="amount2" value={amount2} step="10" min="0" onChange={(event) => setAmount2(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount3">Metro Prop:</label>
+          <input type="number" id="amount3" value={amount3} step="10" min="0" onChange={(event) => setAmount3(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount4">Pioneer Mult:</label>
+          <input type="number" id="amount4" value={amount4} step="10" min="0" onChange={(event) => setAmount4(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount5">Shady Brooks:</label>
+          <input type="number" id="amount5" value={amount5} step="10" min="0" onChange={(event) => setAmount5(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount6">Stryker Drlg:</label>
+          <input type="number" id="amount6" value={amount6} step="10" min="0" onChange={(event) => setAmount6(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount7">Tri City Trans:</label>
+          <input type="number" id="amount7" value={amount7} step="10" min="0" onChange={(event) => setAmount7(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount8">United Auto:</label>
+          <input type="number" id="amount8" value={amount8} step="10" min="0" onChange={(event) => setAmount8(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount9">Uranium Ent:</label>
+          <input type="number" id="amount9" value={amount9} step="10" min="0" onChange={(event) => setAmount9(event.target.value)}/>
+        </div>
+        <div className="stock_amount">
+          <label htmlFor="amount10">Valley Power:</label>
+          <input type="number" id="amount10" value={amount10} step="10" min="0" onChange={(event) => setAmount10(event.target.value)}/>
+        </div>
       </form>
     </div>
   );
