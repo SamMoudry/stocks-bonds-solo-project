@@ -34,6 +34,7 @@ function GamePage() {
   let currentYear = newYearData[newYearData.length - 1];
   useEffect(() => {
     dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
+    return (() => dispatch({ type: 'CLEAR_NEW_YEAR'}));
   }, [dispatch, user_id]);
 
   const YearButton = () => {
