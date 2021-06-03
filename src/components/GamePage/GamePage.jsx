@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import './GamePage.css'
+import GameTable from './GameTable/GameTable.jsx';
 
 function GamePage() {
   const [value1, setValue1] = useState(100);
@@ -30,23 +31,26 @@ function GamePage() {
   const user_id = useSelector(store => store.user.id)
   const gameId = useSelector(store => store.setNewGame.gameId);
   const newYearData = useSelector(store => store.setNewYear);
+  let currentYear = newYearData[newYearData.length - 1];
   useEffect(() => {
     dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
   }, [dispatch, user_id]);
 
   const YearButton = () => {
-    if (yearNum === 0) {
-      return (
-        <button onClick={newYear}>Start Game</button>
-      );
-    } if (yearNum === 11) {
+    if (gameId) {
+      if (yearNum === 0) {
         return (
-          <button onClick={newYear}>New Game</button>
+          <button onClick={newYear}>Start Game</button>
         );
-    } else {
-      return (
-        <button onClick={newYear}>Year {yearNum}</button>
-      );
+      } else if (yearNum === 11) {
+          return (
+            <button onClick={newYear}>New Game</button>
+          );
+      } else {
+        return (
+          <button onClick={newYear}>Year {yearNum}</button>
+        );
+      }
     }
   }
 
@@ -69,90 +73,27 @@ function GamePage() {
       total_money: totalBalance, 
       stocks: stockDataToSend,
     }});
-    dispatch({type: 'NEW_YEAR', payload: {game_id: gameId, year_number: yearNum}})
-    console.log(newYearData);
+    if (newYearData) {
+      setValues();
+    }
+  }
+
+  const setValues = () => {
+    setValue2(currentYear.value[0]);
+    setValue3(currentYear.value[1]);
+    setValue4(currentYear.value[2]);
+    setValue5(currentYear.value[3]);
+    setValue6(currentYear.value[4]);
+    setValue7(currentYear.value[5]);
+    setValue8(currentYear.value[6]);
+    setValue9(currentYear.value[7]);
+    setValue10(currentYear.value[8]);
   }
 
 
   return (
     <div className="container">
-      <table id="stockboard">
-        <tbody>
-        <tr>
-          <th className="stockheader">Stocks</th>
-        </tr>
-        <tr>
-          <td className="stockname">
-            <span id="stockname_1">Central City Bonds</span><br />
-            <div className="yieldstyle">YIELD 5%</div>
-            <input type="hidden" value={value1} id="value_0_1" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname" >
-            <span id="stockname_2">Growth Corp</span><br />
-            <div className="yieldstyle">YIELD 1%</div>
-            <input type="hidden" value={value2} id="value_0_2" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname">
-            <span id="stockname_3">Metro Prop</span><br />
-            <div className="yieldstyle">NO YIELD</div>
-            <input type="hidden" value={value3} id="value_0_3" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname" >
-            <span id="stockname_4">Pioneer Mutl</span><br />
-            <div className="yieldstyle">YIELD 4%</div>
-            <input type="hidden" value={value4} id="value_0_4" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname">
-            <span id="stockname_5">Shady Brooks</span><br />
-            <div className="yieldstyle">YIELD 7%</div>
-            <input type="hidden" value={value5} id="value_0_5" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname" >
-            <span id="stockname_6">Stryker Drlg</span><br />
-            <div className="yieldstyle">NO YIELD</div>
-            <input type="hidden" value={value6} id="value_0_6" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname">
-            <span id="stockname_7">Tri City Trans</span><br />
-            <div className="yieldstyle">NO YIELD</div>
-            <input type="hidden" value={value7} id="value_0_7" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname" >
-            <span id="stockname_8">United Auto</span><br />
-            <div className="yieldstyle">YIELD 2%</div>
-            <input type="hidden" value={value8} id="value_0_8" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname">
-            <span id="stockname_9">Uranium Ent</span><br />
-            <div className="yieldstyle">YIELD 6%</div>
-            <input type="hidden" value={value9} id="value_0_9" />
-          </td>
-        </tr>
-        <tr>
-          <td className="stockname" >
-            <span id="stockname_10">Valley Power</span><br />
-            <div className="yieldstyle">YIELD 3%</div>
-            <input type="hidden" value={value10} id="value_0_10" />
-          </td>
-        </tr>
-        </tbody>
-      </table><br />
+      <GameTable />
       {YearButton()}
       <div>Total Balance: {totalBalance}</div><br />
       <div>Yearly Earnings: {yearlyEarnings}</div>
