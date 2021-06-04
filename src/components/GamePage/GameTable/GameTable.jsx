@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 function GameTable() {
 
     let currentYear = useSelector(store => store.setNewYear);
-    console.log(currentYear);
     
     return (
         <div className="container">
