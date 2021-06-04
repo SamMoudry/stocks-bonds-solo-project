@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 function SavedGames() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const savedGames = useSelector((store) => store.setSavedGame);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({type: 'GET_SAVED_GAMES', payload: user.id})
+  }, [dispatch, user]);
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      {savedGames ? savedGames.map((game) => {
+        return (<div key={game.id}><div>{game.description}</div>
+                <button>Delete</button>
+                <button>Edit</button></div>)
+      }): <p></p>}
       <LogOutButton className="btn" />
     </div>
   );

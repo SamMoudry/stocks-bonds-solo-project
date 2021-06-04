@@ -4,26 +4,40 @@ import './GamePage.css'
 import GameTable from './GameTable/GameTable.jsx';
 
 function GamePage() {
-  const [value1, setValue1] = useState(100);
   const [amount1, setAmount1] = useState(0);
-  const [value2, setValue2] = useState(100);
   const [amount2, setAmount2] = useState(0);
-  const [value3, setValue3] = useState(100);
   const [amount3, setAmount3] = useState(0);
-  const [value4, setValue4] = useState(100);
   const [amount4, setAmount4] = useState(0);
-  const [value5, setValue5] = useState(100);
   const [amount5, setAmount5] = useState(0);
-  const [value6, setValue6] = useState(100);
   const [amount6, setAmount6] = useState(0);
-  const [value7, setValue7] = useState(100);
   const [amount7, setAmount7] = useState(0);
-  const [value8, setValue8] = useState(100);
   const [amount8, setAmount8] = useState(0);
-  const [value9, setValue9] = useState(100);
   const [amount9, setAmount9] = useState(0);
-  const [value10, setValue10] = useState(100);
   const [amount10, setAmount10] = useState(0);
+  const [stocks, setStocks] = useState({
+    value1: 100,
+    value2: 100,
+    value3: 100,
+    value4: 100,
+    value5: 100,
+    value6: 100,
+    value7: 100,
+    value8: 100,
+    value9: 100,
+    value10: 100
+  });
+  const [amounts, setAmounts] = useState({
+    amount1: amount1,
+    amount2: amount2,
+    amount3: amount3,
+    amount4: amount4,
+    amount5: amount5,
+    amount6: amount6,
+    amount7: amount7,
+    amount8: amount8,
+    amount9: amount9,
+    amount10: amount10,
+  });
   const [totalBalance, setTotalBalance] = useState(5000);
   const [yearlyEarnings, setYearlyEarnings] = useState(0);
   const [yearNum, setYearNum] = useState(0);
@@ -31,9 +45,12 @@ function GamePage() {
   const user_id = useSelector(store => store.user.id)
   const gameId = useSelector(store => store.setNewGame.gameId);
   const newYearData = useSelector(store => store.setNewYear);
-  let currentYear = newYearData[newYearData.length - 1];
+  let currentTableYear = newYearData[newYearData.length - 1];
   useEffect(() => {
     dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
+    // if (currentTableYear) {
+    //   taco();
+    // }
     return (() => dispatch({ type: 'CLEAR_NEW_YEAR'}));
   }, [dispatch, user_id]);
 
@@ -57,16 +74,16 @@ function GamePage() {
 
 
   const newYear = () => {
-    const stockDataToSend = [{stock_id: 1, value: value1, stock_amount: amount1},
-                            {stock_id: 2, value: value2, stock_amount: amount2},
-                            {stock_id: 3, value: value3, stock_amount: amount3},
-                            {stock_id: 4, value: value4, stock_amount: amount4},
-                            {stock_id: 5, value: value5, stock_amount: amount5},
-                            {stock_id: 6, value: value6, stock_amount: amount6},
-                            {stock_id: 7, value: value7, stock_amount: amount7},
-                            {stock_id: 8, value: value8, stock_amount: amount8},
-                            {stock_id: 9, value: value9, stock_amount: amount9},
-                            {stock_id: 10, value: value10, stock_amount: amount10}
+    const stockDataToSend = [{stock_id: 1, value: stocks.value1, stock_amount: amounts.amount1},
+                            {stock_id: 2, value: stocks.value2, stock_amount: amounts.amount2},
+                            {stock_id: 3, value: stocks.value3, stock_amount: amounts.amount3},
+                            {stock_id: 4, value: stocks.value4, stock_amount: amounts.amount4},
+                            {stock_id: 5, value: stocks.value5, stock_amount: amounts.amount5},
+                            {stock_id: 6, value: stocks.value6, stock_amount: amounts.amount6},
+                            {stock_id: 7, value: stocks.value7, stock_amount: amounts.amount7},
+                            {stock_id: 8, value: stocks.value8, stock_amount: amounts.amount8},
+                            {stock_id: 9, value: stocks.value9, stock_amount: amounts.amount9},
+                            {stock_id: 10, value: stocks.value10, stock_amount: amounts.amount10}
                           ]
     dispatch({type: 'LAST_YEAR', payload: {year_number: yearNum, 
       game_id: gameId, 
@@ -77,34 +94,35 @@ function GamePage() {
   }
 
 
-  // const taco = () => {
-  //   setValue2(currentYear.value[0]);
-  //   setValue3(currentYear.value[1]);
-  //   setValue4(currentYear.value[2]);
-  //   setValue5(currentYear.value[3]);
-  //   setValue6(currentYear.value[4]);
-  //   setValue7(currentYear.value[5]);
-  //   setValue8(currentYear.value[6]);
-  //   setValue9(currentYear.value[7]);
-  //   setValue10(currentYear.value[8]);
-  //   setTotalBalance(currentYear.total_money);
-  //   setYearlyEarnings(currentYear.total_yield);
-  //   setYearNum(currentYear.year_number);
-  //   console.log(value2);
-  // }
+  const taco = () => {
+    setStocks({value1: 100,
+      value2: currentTableYear.value[0],
+      value3: currentTableYear.value[1],
+      value4: currentTableYear.value[2],
+      value5: currentTableYear.value[3],
+      value6: currentTableYear.value[4],
+      value7: currentTableYear.value[5],
+      value8: currentTableYear.value[6],
+      value9: currentTableYear.value[7],
+      value10: currentTableYear.value[8]})
+    setTotalBalance(currentTableYear.total_money);
+    setYearlyEarnings(currentTableYear.total_yield);
+    setYearNum(currentTableYear.year_number);
+    console.log(stocks);
+  }
 
-  // if (currentYear) {
-  //   taco();
-  // }
+  
 
-  const [stocks, setStocks] = useState({
+  const saveGame = () => {
+    dispatch({type: 'ADD_SAVED_GAME', payload: {game_id: gameId, user_id: user_id, description: `${gameId}`}})
+  }
 
-  })
 
   return (
     <div className="container">
       <GameTable />
       {YearButton()}
+      <button onClick={saveGame}>Save Game</button>
       <div>Total Balance: {totalBalance}</div><br />
       <div>Yearly Earnings: {yearlyEarnings}</div>
       <form>

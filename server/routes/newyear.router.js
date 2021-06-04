@@ -57,17 +57,14 @@ router.get('/:id/:year', (req, res) => {
     AND slider.side = $3
     AND slider.die_roll = $4
     GROUP BY stock_year.stock_id, year.year_number, year.total_yield, year.total_money, stock_year.stock_amount, year.game_id;`
-    console.log("year: ", Number(req.params.year), ", gameid: ", Number(req.params.id), ", side: ", slider_side, ", dieroll: ", dieroll);
     pool.query(queryText, [Number(req.params.id), Number(req.params.year), slider_side, dieroll])
         .then((result) => {
             let valueArray = [];
             let stockArray = [];
-            console.log(result.rows);
             for (let i = 0; i < result.rows.length; i++) {
                 valueArray.push(Number(result.rows[i].value));
                 stockArray.push(Number(result.rows[i].stock_amount));
             }
-            console.log("result[0]: ", result.rows[0]);
             res.send({ gameId: result.rows[0].game_id,
             year_number: result.rows[0].year_number,
             total_yield: result.rows[0].total_yield,
