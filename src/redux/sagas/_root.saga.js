@@ -7,6 +7,7 @@ import lastYearSaga from './lastyear.saga.js';
 import newYearSaga from './newyear.saga.js';
 import addSavedGameSaga from './addSavedGame.saga.js';
 import getSavedGameSaga from './getSavedGame.saga.js';
+import deleteSavedGameSaga from './deleteSavedGame.saga.js';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,6 @@ export default function* rootSaga() {
     newYearSaga(),
     addSavedGameSaga(),
     getSavedGameSaga(),
+    deleteSavedGameSaga(),
   ]);
 }

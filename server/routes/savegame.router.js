@@ -26,7 +26,8 @@ router.get('/:id', (req, res) => {
         });
 })
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', (req, res) => {
+    console.log('in delete', req.params.id);
     const queryText = `DELETE FROM "saved_games" 
     WHERE id = $1;`
     pool.query(queryText, [req.params.id])

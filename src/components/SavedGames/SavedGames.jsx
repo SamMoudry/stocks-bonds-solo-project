@@ -7,6 +7,12 @@ function SavedGames() {
   const user = useSelector((store) => store.user);
   const savedGames = useSelector((store) => store.setSavedGame);
   const dispatch = useDispatch();
+
+  const deleteHandle = (e) => {
+    dispatch({type: 'DELETE_SAVED_GAME', payload: e.target.id});
+    dispatch({type: 'GET_SAVED_GAMES', payload: user.id});
+  }
+
   useEffect(() => {
     dispatch({type: 'GET_SAVED_GAMES', payload: user.id})
   }, [dispatch, user]);
@@ -15,7 +21,7 @@ function SavedGames() {
       <h2>Welcome, {user.username}!</h2>
       {savedGames ? savedGames.map((game) => {
         return (<div key={game.id}><div>{game.description}</div>
-                <button>Delete</button>
+                <button id={game.id} onClick={deleteHandle}>Delete</button>
                 <button>Edit</button></div>)
       }): <p></p>}
       <LogOutButton className="btn" />
