@@ -19,6 +19,7 @@ import GamePage from '../GamePage/GamePage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import EditForm from '../EditForm/EditForm.jsx';
 
 import './App.css';
 
@@ -64,6 +65,15 @@ function App() {
             path="/game"
           >
             <GamePage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/detail/:id"
+          >
+
+            <EditForm />
+
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will

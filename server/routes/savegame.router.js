@@ -26,7 +26,8 @@ router.get('/:id', (req, res) => {
         });
 })
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', (req, res) => {
+    console.log('in delete', req.params.id);
     const queryText = `DELETE FROM "saved_games" 
     WHERE id = $1;`
     pool.query(queryText, [req.params.id])
@@ -40,8 +41,10 @@ router.delete('/:id', (req,res) => {
 
 router.put('/:id', (req, res) => {
     const queryText = `UPDATE "saved_games" SET "description" = $1 WHERE id = $2`
+    console.log(req.body.description, req.params.id);
     pool.query(queryText, [req.body.description, req.params.id])
         .then((dbResponse) => {
+            console.log(dbResponse.rows);
             res.send(dbResponse.rows);
         }) .catch((error) => {
             console.log('Error PUT /api/savegame', error);
