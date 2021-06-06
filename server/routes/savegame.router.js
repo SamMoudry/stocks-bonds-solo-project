@@ -41,8 +41,10 @@ router.delete('/:id', (req, res) => {
 
 router.put('/:id', (req, res) => {
     const queryText = `UPDATE "saved_games" SET "description" = $1 WHERE id = $2`
+    console.log(req.body.description, req.params.id);
     pool.query(queryText, [req.body.description, req.params.id])
         .then((dbResponse) => {
+            console.log(dbResponse.rows);
             res.send(dbResponse.rows);
         }) .catch((error) => {
             console.log('Error PUT /api/savegame', error);
