@@ -6,16 +6,6 @@ import GameTable from './GameTable/GameTable.jsx';
 
 function GamePage() {
   const history = useHistory();
-  const [amount1, setAmount1] = useState(0);
-  const [amount2, setAmount2] = useState(0);
-  const [amount3, setAmount3] = useState(0);
-  const [amount4, setAmount4] = useState(0);
-  const [amount5, setAmount5] = useState(0);
-  const [amount6, setAmount6] = useState(0);
-  const [amount7, setAmount7] = useState(0);
-  const [amount8, setAmount8] = useState(0);
-  const [amount9, setAmount9] = useState(0);
-  const [amount10, setAmount10] = useState(0);
   const [year, setYear] = useState({
     value1: 100,
     value2: 100,
@@ -48,7 +38,6 @@ function GamePage() {
   let currentTableYear = newYearData[newYearData.length - 1];
   useEffect(() => {
     dispatch({ type: 'NEW_GAME', payload: {userId: user_id}});
-    
     return (() => dispatch({ type: 'CLEAR_NEW_YEAR'}));
   }, [dispatch, user_id]);
 
